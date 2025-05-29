@@ -2,10 +2,10 @@ import streamlit as st
 import requests
 
 # Set the app title 
-st.title('My name is Siti!!') 
+st.title('Congrats! You now can code HERE in StreamLit') 
 
 # Add a welcome message 
-st.write('Welcome to my Streamlit app!') 
+st.write('Welcome to Streamlit app!') 
 
 # Create a text input 
 widgetuser_input = st.text_input('Enter a custom message:', 'Hello, Streamlit!') 
