@@ -10,8 +10,15 @@ def get_questions(amount=5, category=None, difficulty=None):
         url += f"&category={category}"
     if difficulty:
         url += f"&difficulty={difficulty}"
+
     response = requests.get(url)
     data = response.json()
+
+    # 🔍 Show API response if it fails
+    if data.get("response_code") != 0:
+        st.error(f"Error fetching questions. API response code: {data.get('response_code')}")
+        st.stop()
+
     return data['results']
 
 # Initialize session state
