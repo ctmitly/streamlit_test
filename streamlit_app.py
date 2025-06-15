@@ -27,10 +27,10 @@ def get_questions(amount=5, category=None, difficulty=None):
 # Initialize session state
 if 'questions' not in st.session_state:
     categories = {
-        "General Knowledge": 9,
-        "Science: Computers": 18,
-        "Science: Gadgets": 30,
-        "Entertainment: Video Games": 15,
+        "General Knowledge": 5,
+        "Science: Computers": 5,
+        "Science: Gadgets": 5,
+        "Entertainment: Video Games": 5,
     }
     difficulties = ["easy", "medium", "hard"]
 
