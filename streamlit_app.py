@@ -79,4 +79,4 @@ else:
 
     if st.button("Restart Quiz"):
         st.session_state.clear()
-        st.experimental_rerun()
+        st.rerun()
