@@ -75,7 +75,7 @@ if st.session_state.current < len(st.session_state.questions):
             st.session_state.answer_revealed = True
 
         if st.session_state.answer_revealed:
-            time.sleep(5)  # Wait for 5 seconds
+            time.sleep(3)  # Wait for 5 seconds
             st.session_state.current += 1
             st.session_state.answer_revealed = False  # Reset the flag
             st.rerun()  # Rerun to show the next question
