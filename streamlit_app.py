@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import random
 import html
+import time
 
 # Function to fetch quiz questions
 def get_questions(amount=5, category=None, difficulty=None):
