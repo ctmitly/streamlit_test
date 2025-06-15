@@ -64,7 +64,7 @@ if st.session_state.current < len(st.session_state.questions):
             st.error(f"❌ Incorrect! Correct answer: **{correct}**")
         st.session_state.answers.append((question_text, selected, correct))
         st.session_state.current += 1
-        st.experimental_rerun()
+        st.rerun()
 
 else:
     st.title("🎉 Quiz Complete!")
