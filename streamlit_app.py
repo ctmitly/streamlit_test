@@ -42,6 +42,7 @@ if 'questions' not in st.session_state:
     st.session_state.current = 0
     st.session_state.score = 0
     st.session_state.answers = []
+    st.session_state.answer_revealed = False  #add new timer
 
 st.title("🧠 Quiz App")
 
@@ -68,8 +69,9 @@ if st.session_state.current < len(st.session_state.questions):
                 st.session_state.score += 1
             else:
                 st.error(f"❌ Incorrect! Correct answer: **{correct}**")
+            #added here too
             st.session_state.answers.append((question_text, selected, correct))
-            st.session_state.current += 1
+            st.session_state.answer_revealed = True
 
         if st.session_state.answer_revealed:
             time.sleep(5)  # Wait for 5 seconds
