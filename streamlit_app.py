@@ -57,21 +57,23 @@ if st.session_state.current < len(st.session_state.questions):
     options = [html.unescape(opt) for opt in options]
     random.shuffle(options)
 
-    selected = st.radio("Choose your answer:", options)
+   with st.form(key='quiz_form'):Add commentMore actions
+        selected = st.radio("Choose your answer:", options)
+        submit_button = st.form_submit_button("Submit")
 
-    if st.button("Submit"):
-        correct = html.unescape(question['correct_answer'])
-        if selected == correct:
-            st.success("✅ Correct!")
-            st.session_state.score += 1
-        else:
-            st.error(f"❌ Incorrect! Correct answer: **{correct}**")
-        st.session_state.answers.append((question_text, selected, correct))
+        if submit_button:
+            correct = html.unescape(question['correct_answer'])
+            if selected == correct:
+                st.success("✅ Correct!")
+                st.session_state.score += 1
+            else:
+                st.error(f"❌ Incorrect! Correct answer: **{correct}**")
+            st.session_state.answers.append((question_text, selected, correct))
         
         # Show the Next button after answering
         if st.button("Next Question"):
             st.session_state.current += 1
-            st.experimental_rerun()  # Rerun the app to show the next question
+            st.rerun()  # Rerun the app to show the next question
 
 else:
     st.title("🎉 Quiz Complete!")
@@ -86,4 +88,4 @@ else:
 
     if st.button("Restart Quiz"):
         st.session_state.clear()
-        st.experimental_rerun()
+        st.rerun()
