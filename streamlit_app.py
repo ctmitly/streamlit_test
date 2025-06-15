@@ -57,18 +57,19 @@ if st.session_state.current < len(st.session_state.questions):
     options = [html.unescape(opt) for opt in options]
     random.shuffle(options)
 
-    selected = st.radio("Choose your answer:", options)
+    with st.form(key='quiz_form'):
+        selected = st.radio("Choose your answer:", options)
+        submit_button = st.form_submit_button("Submit")
 
-    if st.button("Submit"):
-        correct = html.unescape(question['correct_answer'])
-        if selected == correct:
-            st.success("✅ Correct!")
-            st.session_state.score += 1
-        else:
-            st.error(f"❌ Incorrect! Correct answer: **{correct}**")
-        st.session_state.answers.append((question_text, selected, correct))
-        st.session_state.current += 1
-        st.rerun()
+        if submit_button:
+            correct = html.unescape(question['correct_answer'])
+            if selected == correct:
+                st.success("✅ Correct!")
+                st.session_state.score += 1
+            else:
+                st.error(f"❌ Incorrect! Correct answer: **{correct}**")
+            st.session_state.answers.append((question_text, selected, correct))
+            st.session_state.current += 1
 
 else:
     st.title("🎉 Quiz Complete!")
