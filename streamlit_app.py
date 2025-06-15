@@ -17,7 +17,7 @@ def get_questions(amount=5, category=None, difficulty=None):
     #if data.get("response_code") != 0:
       #  st.error(f"Error fetching questions. API response code: {data.get('response_code')}")
        # st.stop()
-    if data.get("response_code") == 5:
+    if data.get("response_code") == 0:
         st.error("No questions available for the selected category and difficulty. Please try different options.")
         st.stop()
 
