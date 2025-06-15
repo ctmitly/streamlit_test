@@ -57,7 +57,7 @@ if st.session_state.current < len(st.session_state.questions):
     options = [html.unescape(opt) for opt in options]
     random.shuffle(options)
 
-   with st.form(key='quiz_form'):Add commentMore actions
+    with st.form(key='quiz_form'):
         selected = st.radio("Choose your answer:", options)
         submit_button = st.form_submit_button("Submit")
 
@@ -69,11 +69,7 @@ if st.session_state.current < len(st.session_state.questions):
             else:
                 st.error(f"❌ Incorrect! Correct answer: **{correct}**")
             st.session_state.answers.append((question_text, selected, correct))
-        
-        # Show the Next button after answering
-        if st.button("Next Question"):
             st.session_state.current += 1
-            st.rerun()  # Rerun the app to show the next question
 
 else:
     st.title("🎉 Quiz Complete!")
