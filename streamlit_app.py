@@ -14,7 +14,6 @@ def get_questions(amount=5, category=None, difficulty=None):
     response = requests.get(url)
     data = response.json()
 
-    # 🔍 Show API response if it fails
     if data.get("response_code") != 0:
         st.error(f"Error fetching questions. API response code: {data.get('response_code')}")
         st.stop()
@@ -23,7 +22,19 @@ def get_questions(amount=5, category=None, difficulty=None):
 
 # Initialize session state
 if 'questions' not in st.session_state:
-    st.session_state.questions = get_questions()
+    categories = {
+        "General Knowledge": 9,
+        "Science: Computers": 18,
+        "Science: Gadgets": 30,
+        "Entertainment: Video Games": 15,
+    }
+    difficulties = ["easy", "medium", "hard"]
+
+    selected_category = st.selectbox("Select Category", list(categories.keys()))
+    selected_difficulty = st.selectbox("Select Difficulty", difficulties)
+
+    category_id = categories[selected_category]
+    st.session_state.questions = get_questions(category=category_id, difficulty=selected_difficulty)
     st.session_state.current = 0
     st.session_state.score = 0
     st.session_state.answers = []
