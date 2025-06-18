@@ -45,7 +45,7 @@ if 'questions' not in st.session_state:
     st.session_state.answers = []
     st.session_state.answer_revealed = False  #add new timer
 
-st.title("🧠 Quiz App")
+st.title("Random Quiz App")
 
 # Show current question
 if st.session_state.current < len(st.session_state.questions):
@@ -66,10 +66,10 @@ if st.session_state.current < len(st.session_state.questions):
         if submit_button:
             correct = html.unescape(question['correct_answer'])
             if selected == correct:
-                st.success("✅ Correct!")
+                st.success("Correct!")
                 st.session_state.score += 1
             else:
-                st.error(f"❌ Incorrect! Correct answer: **{correct}**")
+                st.error(f"Incorrect! Correct answer: **{correct}**")
             #added here too
             st.session_state.answers.append((question_text, selected, correct))
             st.session_state.answer_revealed = True
@@ -80,7 +80,7 @@ if st.session_state.current < len(st.session_state.questions):
             st.session_state.answer_revealed = False  # Reset the flag
             st.rerun()  # Rerun to show the next question
 else:
-    st.title("🎉 Quiz Complete!")
+    st.title("The Quiz is Complete!")
     st.write(f"Your final score is **{st.session_state.score}/{len(st.session_state.questions)}**")
 
     with st.expander("Review Answers"):
