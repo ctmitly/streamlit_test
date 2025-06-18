@@ -15,18 +15,19 @@ def get_questions(amount=5, category=None, difficulty=None):
     response = requests.get(url)
     data = response.json()
 
-    #if data.get("response_code") != 0:
-      #  st.error(f"Error fetching questions. API response code: {data.get('response_code')}")
-       # st.stop()
     if data.get("response_code") == 5:
         st.error("No questions available for the selected category and difficulty. Please try different options.")
         st.stop()
 
-
     return data['results']
 
-# Initialize session state
+# Setup app title
+st.title("Random Quiz App")
+
+# Category and difficulty selection only shown before quiz starts
 if 'questions' not in st.session_state:
+
+    # Options
     categories = {
         "General Knowledge": 9,
         "Science: Computers": 13,
@@ -35,20 +36,23 @@ if 'questions' not in st.session_state:
     }
     difficulties = ["easy", "medium", "hard"]
 
+    # Selection widgets
     selected_category = st.selectbox("Select Category", list(categories.keys()))
     selected_difficulty = st.selectbox("Select Difficulty", difficulties)
 
-    category_id = categories[selected_category]
-    st.session_state.questions = get_questions(category=category_id, difficulty=selected_difficulty)
-    st.session_state.current = 0
-    st.session_state.score = 0
-    st.session_state.answers = []
-    st.session_state.answer_revealed = False  #add new timer
+    # Start button
+    if st.button("Start Quiz"):
+        category_id = categories[selected_category]
+        st.session_state.questions = get_questions(category=category_id, difficulty=selected_difficulty)
+        st.session_state.current = 0
+        st.session_state.score = 0
+        st.session_state.answers = []
+        st.session_state.answer_revealed = False
+        st.rerun()
 
-st.title("Random Quiz App")
+# Once questions are loaded, show the quiz
+elif st.session_state.current < len(st.session_state.questions):
 
-# Show current question
-if st.session_state.current < len(st.session_state.questions):
     question = st.session_state.questions[st.session_state.current]
     st.subheader(f"Question {st.session_state.current + 1}")
 
@@ -70,15 +74,16 @@ if st.session_state.current < len(st.session_state.questions):
                 st.session_state.score += 1
             else:
                 st.error(f"Incorrect! Correct answer: **{correct}**")
-            #added here too
             st.session_state.answers.append((question_text, selected, correct))
             st.session_state.answer_revealed = True
 
         if st.session_state.answer_revealed:
-            time.sleep(3)  # Wait for 5 seconds
+            time.sleep(3)
             st.session_state.current += 1
-            st.session_state.answer_revealed = False  # Reset the flag
-            st.rerun()  # Rerun to show the next question
+            st.session_state.answer_revealed = False
+            st.rerun()
+
+# Quiz is finished
 else:
     st.title("The Quiz is Complete!")
     st.write(f"Your final score is **{st.session_state.score}/{len(st.session_state.questions)}**")
