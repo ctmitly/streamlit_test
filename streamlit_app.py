@@ -5,12 +5,12 @@ import html
 import time
 
 # Function to fetch quiz questions
-def get_questions(amount=5):
+def get_questions(amount=5, category=None, difficulty=None):
     url = f"https://opentdb.com/api.php?amount={amount}&type=multiple"
-    # if category:
-      #  url += f"&category={category}"
-    # if difficulty:
-      #  url += f"&difficulty={difficulty}"
+    if category:
+        url += f"&category={category}"
+    if difficulty:
+        url += f"&difficulty={difficulty}"
 
     response = requests.get(url)
     data = response.json()
