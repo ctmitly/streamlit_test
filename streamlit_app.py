@@ -22,7 +22,7 @@ def get_questions(amount=5, category=None, difficulty=None):
     return data['results']
 
 # Setup app title
-st.title("Random Quiz App")
+st.title("Random Quiz App 🧠")
 
 # Category and difficulty selection only shown before quiz starts
 if 'questions' not in st.session_state:
@@ -85,16 +85,16 @@ elif st.session_state.current < len(st.session_state.questions):
 
 # Quiz is finished
 else:
-    st.title("The Quiz is Complete!")
+    st.title("The Quiz is Complete! 🥳")
     st.write(f"Your final score is **{st.session_state.score}/{len(st.session_state.questions)}**")
 
-    with st.expander("Review Answers"):
+    with st.expander("Review Answers ✍🏻"):
         for q, selected, correct in st.session_state.answers:
             st.write(f"**Q:** {q}")
             st.write(f"Your Answer: {selected}")
             st.write(f"Correct Answer: {correct}")
             st.markdown("---")
 
-    if st.button("Restart Quiz"):
+    if st.button("Restart Quiz 📝"):
         st.session_state.clear()
         st.rerun()
