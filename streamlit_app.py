@@ -23,7 +23,7 @@ def get_questions(amount=5, category=None, difficulty=None):
 
 # Setup app title
 st.title("Random Quiz App 🧠")
-st.image("quiz app.png", use_column_width=True)
+st.image("quiz app.png")
 
 # Category and difficulty selection only shown before quiz starts
 if 'questions' not in st.session_state:
