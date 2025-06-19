@@ -32,7 +32,7 @@ if 'questions' not in st.session_state:
     categories = {
         "General Knowledge": 9,
         "Science: Computers": 13,
-        "Science: Gadgets": 12,
+        "Music": 12,
         "Entertainment: Video Games": 15,
     }
     difficulties = ["easy", "medium", "hard"]
