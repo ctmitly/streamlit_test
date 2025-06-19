@@ -5,7 +5,7 @@ import html
 import time
 
 # Function to fetch quiz questions
-def get_questions(amount=5, category={category}, difficulty=None):
+def get_questions(amount=5, category=None, difficulty=None):
     url = f"https://opentdb.com/api.php?amount={amount}&type=multiple"
     if category:
         url += f"&category={category}"
@@ -29,13 +29,13 @@ st.image("quiz app.png")
 if 'questions' not in st.session_state:
 
     # Options
-    category = {
+    categories = {
         "General Knowledge": 9,
         "Science: Computers": 13,
         "Science: Gadgets": 12,
         "Entertainment: Video Games": 15,
     }
-    difficulty = ["easy", "medium", "hard"]
+    difficulties = ["easy", "medium", "hard"]
 
     # Selection widgets
     selected_category = st.selectbox("Select Category", list(categories.keys()))
@@ -43,7 +43,7 @@ if 'questions' not in st.session_state:
 
     # Start button
     if st.button("Start Quiz"):
-        category_id = category[selected_category]
+        category_id = categories[selected_category]
         st.session_state.questions = get_questions(category=category_id, difficulty=selected_difficulty)
         st.session_state.current = 0
         st.session_state.score = 0
