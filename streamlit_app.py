@@ -21,7 +21,7 @@ def get_questions(amount=5, category=None, difficulty=None):
 
     return data['results']
 
-# Setup app title
+# Set app title and banner
 st.title("Random Quiz App 🧠")
 st.image("quiz app.png")
 
@@ -84,7 +84,7 @@ elif st.session_state.current < len(st.session_state.questions):
             st.session_state.answer_revealed = False
             st.rerun()
 
-# Quiz is finished
+# Quiz is finished and reveal answers
 else:
     st.title("The Quiz is Complete! 🥳")
     st.write(f"Your final score is **{st.session_state.score}/{len(st.session_state.questions)}**")
@@ -96,6 +96,7 @@ else:
             st.write(f"Correct Answer: {correct}")
             st.markdown("---")
 
+    # Restart quiz for a new question
     if st.button("Restart Quiz 📝"):
         st.session_state.clear()
         st.rerun()
