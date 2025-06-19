@@ -35,7 +35,7 @@ if 'questions' not in st.session_state:
         "Music": 12,
         "Entertainment: Video Games": 15,
     }
-    difficulties = ["easy", "medium", "hard"]
+    difficulties = ["hard", "medium", "easy"]
 
     # Selection widgets
     selected_category = st.selectbox("Select Category", list(categories.keys()))
