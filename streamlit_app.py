@@ -35,11 +35,11 @@ if 'questions' not in st.session_state:
         "Music": 12,
         "Entertainment: Video Games": 15,
     }
-    difficulties = ["hard", "medium", "easy"]
+    difficulties = ["easy", "medium", "hard"]
 
     # Selection widgets
     selected_category = st.selectbox("Select Category", list(categories.keys()))
-    selected_difficulty = st.selectbox("Select Difficulty", difficulties)
+    selected_difficulty = st.selectbox("Select Difficulty", difficulties, index=1)
 
     # Start button
     if st.button("Start Quiz"):
